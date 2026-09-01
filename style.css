@@ -20,6 +20,15 @@
     --head-h:    96px;
     --brand-h:   64px;
 
+    /* 字号：单一等比级数（约 1.18），所有组件只能从这里取值 */
+    --fs-micro-xs:  8px;   /* 罗盘刻度 */
+    --fs-micro:     9px;   /* 全大写微标签：编号、年份、坐标 */
+    --fs-fine:     11px;   /* 次级小字 */
+    --fs-sm:       13px;   /* 界面文字：导航、索引、联系方式 */
+    --fs-base:     15px;   /* 正文 */
+    --fs-md:       18px;   /* 品牌名、小标题 */
+    --fs-lg:       21px;   /* 页面标题 */
+
     --serif:     "Newsreader", "Noto Serif TC", "Songti SC", Georgia, serif;
     --sans:      "Overpass", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 
@@ -59,7 +68,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .micro {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.24em;
     text-transform: uppercase;
 }
@@ -97,7 +106,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .brand-name {
-    font-size: 18px;
+    font-size: var(--fs-md);
     line-height: 1.2;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -108,7 +117,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    font-size: 14px;
+    font-size: var(--fs-sm);
     line-height: 1.6;
     margin-top: 24px;
 }
@@ -131,30 +140,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     column-gap: 0;
     padding-bottom: 3px;
     opacity: 0.45;
-    background-image: linear-gradient(rgba(27,28,27,0.5), rgba(27,28,27,0.5));
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-size: 0% 1px;
-    transition: opacity 0.6s var(--ease), background-size 0.6s var(--ease);
+    transition: opacity 0.6s var(--ease);
 }
 
 .nav-item:hover,
-.nav-item.is-active {
-    opacity: 1;
-    background-size: 100% 1px;
-}
+.nav-item.is-active { opacity: 1; }
 
 .nav-num {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.2em;
     opacity: 0.4;
     flex: 0 0 22px;
 }
 
 .nav-label {
-    font-size: 15px;
+    font-size: var(--fs-sm);
     letter-spacing: 0.11em;
     text-transform: uppercase;
 }
@@ -162,7 +164,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tagline {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.22em;
     text-transform: uppercase;
     opacity: 0.32;
@@ -194,7 +196,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .view-label {
-    font-size: 14px;
+    font-size: var(--fs-sm);
     letter-spacing: 0.16em;
     text-transform: uppercase;
 }
@@ -202,7 +204,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .view-mark {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.2em;
     opacity: 0.3;
 }
@@ -251,21 +253,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .home-left {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.24em;
     text-transform: uppercase;
     opacity: 0.45;
 }
 
 .home-sub {
-    font-size: 20px;
+    font-size: var(--fs-md);
     line-height: 1.3;
     margin-top: 16px;
     font-style: italic;
 }
 
 .home-body {
-    font-size: 15px;
+    font-size: var(--fs-base);
     line-height: 1.85;
     margin: 16px 0 0 0;
     opacity: 0.82;
@@ -286,7 +288,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .home-flow-label {
     grid-column: 1 / 4;
-    font-size: 13px;
+    font-size: var(--fs-fine);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     opacity: 0.55;
@@ -304,13 +306,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .flow-num {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.2em;
     opacity: 0.4;
 }
 
 .flow-text {
-    font-size: 22px;
+    font-size: var(--fs-md);
     line-height: 1.15;
     transition: opacity 0.5s var(--ease);
 }
@@ -366,7 +368,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .index-row.is-active { opacity: 1; }
 
 .index-title {
-    font-size: 15px;
+    font-size: var(--fs-sm);
     line-height: 1.3;
     text-wrap: pretty;
 }
@@ -374,7 +376,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .index-year {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.16em;
     opacity: 0.4;
     margin-left: 16px;
@@ -398,13 +400,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .content-title {
-    font-size: 22px;
+    font-size: var(--fs-lg);
     line-height: 1.25;
     font-style: italic;
     margin-bottom: 48px;
 }
 
 .gallery {
+    --gal-max-h: min(592px, 64vh);
     display: flex;
     flex-direction: column;
     gap: 96px;
@@ -412,22 +415,32 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .gallery img {
     width: 100%;
-    max-height: min(592px, 64vh);
+    max-height: var(--gal-max-h);
     object-fit: contain;
     object-position: left top;
     display: block;
     cursor: zoom-in;
 }
 
+/* 锁定统一画幅的项目：--gal-ratio 由 script.js 按项目写入，
+   宽度收在「不会顶破最大高度」的范围内，画幅才不会被 max-height 拉歪 */
+.gallery.is-ratio img {
+    width: min(100%, calc(var(--gal-max-h) * var(--gal-ratio)));
+    aspect-ratio: var(--gal-ratio);
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+}
+
 .article-title {
-    font-size: 26px;
+    font-size: var(--fs-lg);
     font-weight: 300;
     line-height: 1.3;
     margin: 0 0 48px 0;
 }
 
 .article p {
-    font-size: 16px;
+    font-size: var(--fs-base);
     line-height: 1.9;
     margin: 0 0 1.5em 0;
     text-align: justify;
@@ -493,7 +506,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .compass-pin { position: absolute; left: 50%; top: 21px; width: 0.5px; height: 8px; margin-left: -0.25px; background: rgba(27,28,27,0.4); }
 .compass-label {
     position: absolute; left: 0; right: 0; top: -3px; text-align: center;
-    font-family: var(--sans); font-weight: 300; font-size: 7px;
+    font-family: var(--sans); font-weight: 300; font-size: var(--fs-micro-xs);
     letter-spacing: 0.16em; color: rgba(27,28,27,0.6);
 }
 
@@ -501,7 +514,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     margin-top: 10px;
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 9px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     opacity: 0.42;
@@ -558,8 +571,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     top: 28px;
     right: 28px;
     z-index: 2020;
-    font-family: var(--sans);
-    font-size: 13px;
+    font-size: var(--fs-fine);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     transition: opacity 0.4s var(--ease);
@@ -575,9 +587,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     display: flex;
     justify-content: space-between;
     gap: 24px;
-    font-family: var(--sans);
     font-weight: 300;
-    font-size: 10px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     opacity: 0.5;
@@ -619,11 +630,10 @@ body.is-locked { overflow: hidden; }
         border-bottom: 1px solid var(--rule);
     }
 
-    .m-bar-name { font-size: 17px; letter-spacing: 0.01em; }
+    .m-bar-name { font-size: var(--fs-base); letter-spacing: 0.01em; }
 
     .m-bar-toggle {
-        font-family: var(--sans);
-        font-size: 13px;
+        font-size: var(--fs-sm);
         letter-spacing: 0.16em;
         text-transform: uppercase;
     }
@@ -650,15 +660,14 @@ body.is-locked { overflow: hidden; }
 
     .nav .brand { display: none; }
 
-    .contact { margin-top: 0; font-size: 16px; gap: 10px; }
+    .contact { margin-top: 0; font-size: var(--fs-base); gap: 10px; }
 
     .nav-spacer-a { flex: 0 0 48px; }
     .nav-spacer-b { flex: 1; }
 
     .nav-list { gap: 20px; }
-    .nav-label { font-size: 22px; letter-spacing: 0.08em; }
-    .nav-item { opacity: 1; background-size: 0% 1px; }
-    .nav-item.is-active { background-size: 100% 1px; }
+    .nav-label { font-size: var(--fs-md); letter-spacing: 0.08em; }
+    .nav-item { opacity: 1; }
 
     /* --- 主区正常文档流 --- */
     .main {
@@ -693,7 +702,7 @@ body.is-locked { overflow: hidden; }
     .home-flow { display: block; }
     .home-flow-label { margin-bottom: 20px; }
     .home-flow-list { gap: 18px; }
-    .flow-text { font-size: 26px; letter-spacing: -0.01em; }
+    .flow-text { font-size: var(--fs-lg); letter-spacing: -0.01em; }
 
     /* --- 索引变全屏浮层 --- */
     .split { display: block; margin-left: 0; }
@@ -726,21 +735,21 @@ body.is-locked { overflow: hidden; }
     }
 
     .index-row { opacity: 0.55; }
-    .index-title { font-size: 18px; }
+    .index-title { font-size: var(--fs-base); }
 
     .side-foot { display: none; }
 
     .content { padding: 32px 0 96px 0; }
 
-    .content-title { font-size: 20px; margin-bottom: 32px; }
+    .content-title { font-size: var(--fs-md); margin-bottom: 32px; }
 
-    .gallery { gap: 48px; }
+    .gallery { gap: 48px; --gal-max-h: 200vh; }
     .gallery img { max-height: none; }
 
-    .article-title { font-size: 22px; margin-bottom: 32px; }
+    .article-title { font-size: var(--fs-md); margin-bottom: 32px; }
 
     .article p {
-        font-size: 16px;
+        font-size: var(--fs-base);
         line-height: 1.85;
         max-width: none;
         text-align: left;
@@ -753,8 +762,7 @@ body.is-locked { overflow: hidden; }
         left: var(--pad);
         bottom: calc(14px + env(safe-area-inset-bottom));
         z-index: 4850;
-        font-family: var(--sans);
-        font-size: 13px;
+        font-size: var(--fs-sm);
         letter-spacing: 0.16em;
         text-transform: uppercase;
         padding: 0;
@@ -782,7 +790,7 @@ body.is-locked { overflow: hidden; }
     /* --- 灯箱 --- */
     .lightbox-stage { width: 92vw; height: 72vh; }
     .lb-close { top: 18px; right: var(--pad); }
-    .lb-info { bottom: calc(18px + env(safe-area-inset-bottom)); left: var(--pad); right: var(--pad); font-size: 9px; }
+    .lb-info { bottom: calc(18px + env(safe-area-inset-bottom)); left: var(--pad); right: var(--pad); }
 }
 
 /* =========================================================================

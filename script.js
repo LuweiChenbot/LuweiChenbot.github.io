@@ -194,6 +194,12 @@
             g.appendChild(img);
         });
 
+        // 个别项目锁定统一画幅（如 4:5 横构图），比例写在 site-data 的 ratios 里
+        var ratio = (D.ratios || {})[state.photo];
+        g.classList.toggle('is-ratio', !!ratio);
+        if (ratio) g.style.setProperty('--gal-ratio', ratio);
+        else g.style.removeProperty('--gal-ratio');
+
         var loc = (D.places || {})[state.photo];
         $('mapPlace').textContent = loc ? loc.place : '';
         $('mapCoords').textContent = loc
