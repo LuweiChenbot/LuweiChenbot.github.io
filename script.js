@@ -23,6 +23,7 @@
     var D = null;
     var state = { view: 'home', text: 'txt-1', photo: 'p1', note: 'n1' };
     var world = null, dimTimer = null;
+    var closeLightbox = function () {};      // initLightbox 里装上真正的实现
 
     var $ = function (id) { return document.getElementById(id); };
     var isMobile = function () { return window.innerWidth <= MOBILE; };
@@ -71,6 +72,7 @@
         });
 
         document.body.classList.toggle('has-index', v !== 'home');
+        closeLightbox();
         closeIndex();
         closeMenu();
 
@@ -169,6 +171,7 @@
             b.appendChild(el('span', 'index-title', r.title));
             b.appendChild(el('span', 'index-year', r.year || ''));
             b.addEventListener('click', function () {
+                closeLightbox();
                 if (r.id === activeId) { closeIndex(); return; }
                 soft(function () { onPick(r.id); });
             });
@@ -402,6 +405,8 @@
             if (!t.closest('.gallery') && !t.closest('#homeItems')) return;
             open(t);
         });
+
+        closeLightbox = function () { if (!box.hidden) close(); };
 
         box.querySelector('[data-lb-close]').addEventListener('click', close);
         box.querySelector('[data-lb-prev]').addEventListener('click', function () { step(-1); });

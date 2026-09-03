@@ -524,11 +524,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* =========================================================================
    5. 灯箱
    ========================================================================= */
+/* 灯箱是模态层：z-index 必须高过移动端那套固定外壳
+   （.m-bar 5000 / .nav 4900 / .m-index-btn 4850 / .side 4800），
+   否则顶栏会盖住关闭按钮，索引按钮也还能在灯箱上层被点到 */
 .lightbox {
     position: fixed;
     inset: 0;
     background: var(--bg);
-    z-index: 2000;
+    z-index: 6000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -547,7 +550,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    z-index: 2002;
+    z-index: 6002;
 }
 
 .lightbox-stage img {
@@ -562,7 +565,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .lightbox-stage img.is-swapping { opacity: 0; }
 
-.lb-zone { position: fixed; top: 0; bottom: 0; width: 50%; z-index: 2005; }
+.lb-zone { position: fixed; top: 0; bottom: 0; width: 50%; z-index: 6005; }
 .lb-prev { left: 0; cursor: w-resize; }
 .lb-next { right: 0; cursor: e-resize; }
 
@@ -570,7 +573,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     position: fixed;
     top: 28px;
     right: 28px;
-    z-index: 2020;
+    z-index: 6020;
     font-size: var(--fs-fine);
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -592,7 +595,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     letter-spacing: 0.18em;
     text-transform: uppercase;
     opacity: 0.5;
-    z-index: 2010;
+    z-index: 6010;
     pointer-events: none;
 }
 
@@ -789,7 +792,12 @@ body.is-locked { overflow: hidden; }
 
     /* --- 灯箱 --- */
     .lightbox-stage { width: 92vw; height: 72vh; }
-    .lb-close { top: 18px; right: var(--pad); }
+    .lb-close {
+        top: calc(18px + env(safe-area-inset-top));
+        right: var(--pad);
+        padding: 12px;
+        margin: -12px;          /* 只放大热区，文字位置不变 */
+    }
     .lb-info { bottom: calc(18px + env(safe-area-inset-bottom)); left: var(--pad); right: var(--pad); }
 }
 
