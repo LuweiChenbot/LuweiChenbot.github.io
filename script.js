@@ -7,10 +7,10 @@
 
     var MOBILE = 900;
     var EASE_MS = 170;                       // 视图切换的柔化间隔
-    var VIEWS = ['home', 'photo', 'text', 'notes'];
-    var LABELS = { home: 'Selected', photo: 'Fotography', text: 'Texts', notes: 'Notes' };
+    var VIEWS = ['home', 'photo', 'text'];
+    var LABELS = { home: 'Selected', photo: 'Fotography', text: 'Texts' };
     var NAV = [['01', 'Home', 'home'], ['02', 'Fotography', 'photo'],
-               ['03', 'Texts', 'text'], ['04', 'Notes', 'notes']];
+               ['03', 'Texts', 'text']];
     // 首页图文交替的 12 栏几何
     var GEOM = [
         ['1 / 9',  '9 / 12'],
@@ -21,7 +21,7 @@
     ];
 
     var D = null;
-    var state = { view: 'home', text: 'txt-1', photo: 'p1', note: 'n1' };
+    var state = { view: 'home', text: 'txt-1', photo: 'p1' };
     var world = null, dimTimer = null;
     var closeLightbox = function () {};      // initLightbox 里装上真正的实现
 
@@ -78,7 +78,6 @@
 
         if (v === 'photo') renderPhoto();
         if (v === 'text')  renderText();
-        if (v === 'notes') renderNotes();
 
         if ($('main')) $('main').scrollTop = 0;
         if (isMobile()) window.scrollTo(0, 0);
@@ -227,30 +226,6 @@
         var img = $('coverImg');
         if (cover) { img.src = cover; img.alt = (a.title || '') + ' — cover'; img.style.display = ''; }
         else { img.removeAttribute('src'); img.style.display = 'none'; }
-        closeIndex();
-    }
-
-    function renderNotes() {
-        var notes = D.notes || [];
-        var rows = notes.map(function (n, i) {
-            return { id: n.id, title: n.title || 'Note ' + String(i + 1).padStart(2, '0'), year: n.date };
-        });
-        renderRows('noteRows', rows, state.note, function (id) {
-            state.note = id; renderNotes();
-        });
-        var active = notes.filter(function (n) { return n.id === state.note; })[0] || notes[0] || {};
-        var idx = notes.indexOf(active);
-        $('noteTitle').textContent = active.title || 'Note ' + String(Math.max(0, idx) + 1).padStart(2, '0');
-        var g = $('noteGallery');
-        g.textContent = '';
-        if (active.img) {
-            var img = el('img');
-            img.src = active.img;
-            img.alt = active.caption || $('noteTitle').textContent;
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            g.appendChild(img);
-        }
         closeIndex();
     }
 
@@ -487,7 +462,10 @@
 
         window.addEventListener('hashchange', function () {
             var v = (window.location.hash || '#home').slice(1);
-            if (v !== state.view) go(VIEWS.indexOf(v) === -1 ? 'home' : v);
+            if (VIEWS.indexOf(v) === -1) v = 'home';
+            if (v !== state.view) go(v);
+            // 已经在这个视图上就只把地址栏收干净（比如旧的 #notes 书签）
+            else if (window.location.hash !== '#' + v) history.replaceState(null, '', '#' + v);
         });
 
         fetch('assets/data/world.json')

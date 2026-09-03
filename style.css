@@ -320,7 +320,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .flow-item:hover .flow-text { opacity: 0.5; }
 
 /* =========================================================================
-   4. 索引 + 内容 三栏（Fotography / Texts / Notes）
+   4. 索引 + 内容 三栏（Fotography / Texts）
    ========================================================================= */
 .split {
     display: flex;
